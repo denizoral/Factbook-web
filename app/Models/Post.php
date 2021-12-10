@@ -14,6 +14,6 @@ class Post extends Model
     }
 
     public function comments() {
-        return $this->hasMant(Comments::class);
+        return $this->hasMany(Comments::class);
     }
 }
