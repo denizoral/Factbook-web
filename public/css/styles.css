@@ -1,0 +1,69 @@
+.topnav {
+    background-color: white;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.topnav a{
+    margin-left: auto;
+    margin-right: 0;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+
+}
+
+.topnav a:hover {
+    background-color: rgb(201, 201, 201);
+    color: black;
+}
+
+.topnav a.active {
+    background-color: red;
+    color: black;
+}
+
+.addPost {
+    border: 1px solid grey;
+    border-radius: 5%;
+    margin: auto;
+    text-align: center;
+    width: 40%;
+}
+
+
+.postLogoPic {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 5px;
+    margin-right: 2px;
+    margin-top: 5px;
+    border: 0.2px solid red;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.postUsername {
+    display: inline-block;
+    
+}
+
+#postDate {
+
+}
+
+.postContent {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid rgb(201, 201, 201);
+    border-radius: 15px;
+    margin-bottom: 3px;
+    width: 40%;
+    margin-block-end: 10px;
+    margin: auto;
+}
