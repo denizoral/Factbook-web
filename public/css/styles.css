@@ -1,36 +1,13 @@
-.topnav {
-    background-color: white;
-    overflow: hidden;
-    margin-bottom: 10px;
-}
-
-.topnav a{
-    margin-left: auto;
-    margin-right: 0;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-
-}
-
-.topnav a:hover {
-    background-color: rgb(201, 201, 201);
-    color: black;
-}
-
-.topnav a.active {
-    background-color: red;
-    color: black;
-}
-
 .addPost {
-    border: 1px solid grey;
-    border-radius: 5%;
     margin: auto;
     text-align: center;
     width: 40%;
+    margin-bottom: 20px;
+}
+
+button {
+
+    margin-top: 10px;
 }
 
 
@@ -41,7 +18,7 @@
     margin-left: 5px;
     margin-right: 2px;
     margin-top: 5px;
-    border: 0.2px solid red;
+    border: 0.2px solid green;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -49,21 +26,45 @@
 
 .postUsername {
     display: inline-block;
+    margin-left: 5px;
     
 }
 
-#postDate {
-
+.postDate {
+    display: inline-block;
+    margin-left: 5px;
 }
 
-.postContent {
+.postContent, .postBox {
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     background-color: white;
     border: 1px solid rgb(201, 201, 201);
-    border-radius: 15px;
-    margin-bottom: 3px;
+    border-left-style: solid;
+    /* border-left-color: green; */
+    border-left: 4px solid rgb(11, 94, 215);
+    /* border-radius: 15px; */
     width: 40%;
     margin-block-end: 10px;
     margin: auto;
+    overflow-wrap: break-word;
 }
+
+.content {
+    margin-left: 10px;
+    margin-right: 10px;
+    white-space: pre-wrap;
+}
+
+.postMisc {
+    text-align: left;
+}
+
+.postMisc a {
+    /* width: 75px;
+    height: 75px; */
+    margin: 5px;
+    /* margin: auto; */
+}
+

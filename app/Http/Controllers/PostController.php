@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Comment;
+use Auth;
 
 class PostController extends Controller
 {
@@ -15,9 +17,17 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::latest()->get();
         $users = User::all();
         return view('posts.index', ['posts' => $posts], ['users' => $users]);
+    }
+
+    public function addPost(Request $req) {
+        $post = new Post;
+        $post->author=Auth::id();
+        $post->content=$req['body'];
+        $post->save();
+        return redirect('dashboard');
     }
 
     /**
@@ -27,7 +37,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -47,10 +57,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $users = User::all();
-        return view('posts.index', [$id => $users]);
+        // $post = Post::findOrFail($id);
+        $comments = Comment::where('post_id', '=', $post->id)->get();
+        return view('posts.post', ['post' => $post], ['comments' => $comments]);
     }
 
     /**

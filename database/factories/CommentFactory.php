@@ -16,7 +16,7 @@ class CommentFactory extends Factory
         return [
             'comment_content' => $this->faker->sentence,
             'comment_author' => $this->faker->numberBetween($min=1, $max=30),
-            'post_author' => $this->faker->numberBetween($min=1, $max=30),
+            //'post_author' => $this->faker->numberBetween($min=1, $max=30),
         ];
     }
 }
