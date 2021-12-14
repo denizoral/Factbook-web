@@ -27,13 +27,19 @@ Route::get('/dashboard', [PostController::class, 'index']);
 
 Route::get('/post/new', [PostController::class, 'create']);
 
-Route::get('/post/{post}', [PostController::class, 'show']);
+Route::get('/post/{id}', [PostController::class, 'show']);
 
 Route::post('/addpost', [PostController::class, 'addPost']);
 
-Route::post('/post/{post}/comments', [CommentsController::class, 'store']);
+Route::post('/post/{id}/comments', [CommentsController::class, 'store']);
 
-Route::delete('/comments/{comment}' [CommentsController::class, 'destroy']);
+Route::post('/editpost/{id}', [PostController::class, 'edit']);
+
+Route::post('/editcomment/{id}', [CommentsController::class, 'edit']);
+
+Route::delete('/post/delete/{id}', [PostController::class, 'destroy']);
+
+Route::delete('/comment/delete/{id}', [CommentsController::class, 'destroy']);
 
 
 require __DIR__.'/auth.php';

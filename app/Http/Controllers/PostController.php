@@ -17,9 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
-        $users = User::all();
-        return view('posts.index', ['posts' => $posts], ['users' => $users]);
+        $posts = Post::latest()->paginate(10);
+        return view('posts.index', ['posts' => $posts]);
     }
 
     public function addPost(Request $req) {
@@ -59,8 +58,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        // $post = Post::findOrFail($id);
-        $comments = Comment::where('post_id', '=', $post->id)->get();
+        $comments = Comment::where('post_id', '=', $post->id)->latest()->paginate(5);
         return view('posts.post', ['post' => $post], ['comments' => $comments]);
     }
 
@@ -95,6 +93,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $result=$post->delete();
+        return redirect('dashboard');
     }
 }

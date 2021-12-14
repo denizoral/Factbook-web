@@ -1,4 +1,4 @@
-.addPost {
+.addPost, .sendComment {
     margin: auto;
     text-align: center;
     width: 40%;
@@ -6,7 +6,6 @@
 }
 
 button {
-
     margin-top: 10px;
 }
 
@@ -18,13 +17,13 @@ button {
     margin-left: 5px;
     margin-right: 2px;
     margin-top: 5px;
-    border: 0.2px solid green;
+    border: 0.2px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
 
-.postUsername {
+.postUsername, .commentUsername {
     display: inline-block;
     margin-left: 5px;
     
@@ -35,7 +34,7 @@ button {
     margin-left: 5px;
 }
 
-.postContent, .postBox {
+.postContent, .postBox, .commentBox {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -49,6 +48,10 @@ button {
     margin-block-end: 10px;
     margin: auto;
     overflow-wrap: break-word;
+}
+
+.commentBox {
+    margin-top: 20px;
 }
 
 .content {
@@ -68,3 +71,9 @@ button {
     /* margin: auto; */
 }
 
+.paginator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
