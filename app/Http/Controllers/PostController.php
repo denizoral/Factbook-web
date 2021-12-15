@@ -18,7 +18,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->paginate(10);
-        return view('posts.index', ['posts' => $posts]);
+        $commentCount = Comment::whereNotNull('post_id')->count();
+        return view('posts.index', ['posts' => $posts], ['commentCount' => $commentCount]);
     }
 
     public function addPost(Request $req) {
@@ -56,8 +57,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
+        $post = Post::findOrFail($id);
         $comments = Comment::where('post_id', '=', $post->id)->latest()->paginate(5);
         return view('posts.post', ['post' => $post], ['comments' => $comments]);
     }
@@ -70,7 +72,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('editpost', ['post' => $post]);
     }
 
     /**
@@ -82,7 +85,12 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        //$post->author=Auth::id();
+        $post->content=$request['body'];
+        $post->edited=true;
+        $post->update();
+        return redirect()->to('post/'.$id);
     }
 
     /**

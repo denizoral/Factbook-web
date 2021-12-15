@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->bigInteger('author')->unsigned()->onDelete('cascade');
             $table->text('content');
+            $table->boolean('edited')->nullable();
             $table->timestamps();
 
             $table->foreign('author')->references('id')->on('users')

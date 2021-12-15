@@ -29,13 +29,17 @@ Route::get('/post/new', [PostController::class, 'create']);
 
 Route::get('/post/{id}', [PostController::class, 'show']);
 
+Route::get('/editpost/{id}', [PostController::class, 'edit']);
+
+Route::get('/editcomment/{id}', [CommentsController::class, 'edit']);
+
 Route::post('/addpost', [PostController::class, 'addPost']);
 
 Route::post('/post/{id}/comments', [CommentsController::class, 'store']);
 
-Route::post('/editpost/{id}', [PostController::class, 'edit']);
+Route::put('/updatepost/{id}', [PostController::class, 'update']);
 
-Route::post('/editcomment/{id}', [CommentsController::class, 'edit']);
+Route::put('/updatecomment/{id}', [CommentsController::class, 'update']);
 
 Route::delete('/post/delete/{id}', [PostController::class, 'destroy']);
 

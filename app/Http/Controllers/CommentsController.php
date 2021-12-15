@@ -9,7 +9,8 @@ use Auth;
 
 class CommentsController extends Controller
 {
-    public function store(Post $post, Request $req) {
+    public function store($id, Request $req) {
+        $post = Post::find($id);
         $comment = new Comment;
 
         $comment->post_id = $post->id;
@@ -28,6 +29,15 @@ class CommentsController extends Controller
 
     public function edit($id)
     {
-        
+        $comment = Comment::findOrFail($id);
+        return view('editcomment', ['comment' => $comment]);
     }
+
+    public function update(Request $request, $id) {
+        $comment = Comment::find($id);
+        $comment->comment = $request['body'];
+        $comment->update();
+        return redirect()->to('post/'.$comment->post_id);
+    }
+
 }

@@ -33,9 +33,29 @@
         
                 <p class="content">{{ $post->content }}</p>
                 <div class="postMisc">
-                    <a href="#"><button class="btn btn-block btn-primary"><i class="fa fa-thumbs-up">Like</i> </button></a>
-                    <a href="#"><button class="btn btn-block btn-primary"><i class="fa fa-thumbs-down">Dislike</i> </button></a>
-                    <a href="/post/{{ $post->id }}">Comment</a>
+                    <a href="#"><button style="margin-bottom: 10px;" class="btn btn-block btn-primary"><i class="fa fa-thumbs-up">Like</i> </button></a>
+                    <a href="#"><button style="margin-bottom: 10px;" class="btn btn-block btn-primary"><i class="fa fa-thumbs-down">Dislike</i> </button></a>
+                    @if ($commentCount==0)
+                    <a href="/post/{{ $post->id }}"><button style="margin-bottom: 10px;" class="btn btn-block btn-primary">View comments</button></a>
+                    @else
+                    <a href="/post/{{ $post->id }}"><button style="margin-bottom: 10px;" class="btn btn-block btn-primary">View {{ $commentCount }} comments</button></a>
+                    @endif
+                    @if ($post->author == Auth::id())
+                    <button style="margin-bottom: 10px;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownbtn" data-bs-toggle="dropdown" aria-expanded="false">
+                    Options
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownbtn">
+                        <li><a onclick="event.preventDefault(); document.getElementById('edit-post').submit();" class="dropdown-item" href="">Edit post</a></li>
+                        <li><a onclick="event.preventDefault(); document.getElementById('delete-post').submit();" class="dropdown-item" href="">Delete post</a></li>
+                    </ul>
+                    <form id="delete-post" action="/post/delete/{{ $post->id }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                    </form>
+                    <form id="edit-post" action="/editpost/{{ $post->id }}" method="GET" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                    @endif
                 </div>
             </div>
             

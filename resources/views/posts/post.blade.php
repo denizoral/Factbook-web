@@ -16,13 +16,16 @@
                 Options
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a type="submit" class="dropdown-item" href="#">Edit post</a></li>
-                <li><a method="POST" onclick="event.preventDefault(); document.getElementById('delete-post').submit();" class="dropdown-item" href="">Delete post</a></li>
+                <li><a onclick="event.preventDefault(); document.getElementById('edit-post').submit();" class="dropdown-item" href="">Edit post</a></li>
+                <li><a onclick="event.preventDefault(); document.getElementById('delete-post').submit();" class="dropdown-item" href="">Delete post</a></li>
                 </ul>
             </div>
             <form id="delete-post" action="/post/delete/{{ $post->id }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
+            </form>
+            <form id="edit-post" action="/editpost/{{ $post->id }}" method="GET" style="display: none;">
+                {{ csrf_field() }}
             </form>
         @endif
     </div>
@@ -56,13 +59,15 @@
                         Options
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Edit comment</a></li>
-                        <li><a method="POST" onclick="event.preventDefault(); document.getElementById('delete-comment').submit();" class="dropdown-item" href="#">Delete comment</a></li>
+                        <li><a onclick="event.preventDefault(); document.getElementById('edit-comment').submit();" class="dropdown-item" class="dropdown-item" href="#">Edit comment</a></li>
+                        <li><a onclick="event.preventDefault(); document.getElementById('delete-comment').submit();" class="dropdown-item" href="#">Delete comment</a></li>
                         </ul>
                     </div>
                     <form id="delete-comment" action="/comment/delete/{{ $comment->id }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
+                    </form>
+                    <form id="edit-comment" action="/editcomment/{{ $comment->id }}" method="GET" style="display: none;">
                     </form>
                 @endif
         </div>
