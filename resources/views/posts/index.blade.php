@@ -4,12 +4,23 @@
 @section('content')
 
     <div>
+        @if (auth()->check() && auth()->user()->is_admin == 1)
+            <h5 style="text-align: center">You are logged in as an admin</h5>
+            <h5 style="text-align: center">You can edit and delete any post.</h5>
+        @endif
         @if (Auth::check())
-        <form action="{{ url('addpost') }}" method="POST">
+        <form action="{{ url('addpost') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="addPost">
+                @if(session()->has('message'))
+                    <div class="alert {{session('alert') ?? 'alert-info'}}">
+                        {{ session('message') }}
+                    </div>
+                @endif
                 <h5>Send a post down below</h5>
                 <textarea class="form-control" name="body" rows="3" autofocus required></textarea>
+                Your image: <input type="file" class="block shadow-5xl mb-10 p-2 w-80 italic placeholder-gray-400" name="image">
+                <hr>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Send post</button>
             </div>
         </form>
@@ -32,15 +43,18 @@
 
         
                 <p class="content">{{ $post->content }}</p>
+                @if ($post->image_path == !null)
+                <img class="postPic" src="/images/{{ $post->image_path }}">
+                @endif
                 <div class="postMisc">
                     <a href="#"><button style="margin-bottom: 10px;" class="btn btn-block btn-primary"><i class="fa fa-thumbs-up">Like</i> </button></a>
                     <a href="#"><button style="margin-bottom: 10px;" class="btn btn-block btn-primary"><i class="fa fa-thumbs-down">Dislike</i> </button></a>
-                    @if ($commentCount==0)
+                    @if ($post->comments->count() <= 0)
                     <a href="/post/{{ $post->id }}"><button style="margin-bottom: 10px;" class="btn btn-block btn-primary">View comments</button></a>
                     @else
-                    <a href="/post/{{ $post->id }}"><button style="margin-bottom: 10px;" class="btn btn-block btn-primary">View {{ $commentCount }} comments</button></a>
+                    <a href="/post/{{ $post->id }}"><button style="margin-bottom: 10px;" class="btn btn-block btn-primary">View {{ $post->comments->count() }} comments</button></a>
                     @endif
-                    @if ($post->author == Auth::id())
+                    @if ($post->author == Auth::id() || (auth()->check() && auth()->user()->is_admin == 1))
                     <button style="margin-bottom: 10px;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownbtn" data-bs-toggle="dropdown" aria-expanded="false">
                     Options
                     </button>

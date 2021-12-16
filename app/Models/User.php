@@ -50,4 +50,17 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany(Post::class);
     }
+
+    //many tags = many users
+    public function tags() {
+        return $this->hasMany(UserTags::class);
+    }
+
+    public function age() {
+        return $this->hasOne(UserInfo::class);
+    }
+
+    public function address() {
+        return $this->hasOne(UserInfo::class);
+    }
 }

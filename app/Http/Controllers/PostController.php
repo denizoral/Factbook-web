@@ -18,16 +18,12 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->paginate(10);
-        $commentCount = Comment::whereNotNull('post_id')->count();
-        return view('posts.index', ['posts' => $posts], ['commentCount' => $commentCount]);
+        // $commentCount = Comment::whereNotNull('post_id')->count();
+        return view('posts.index', ['posts' => $posts]);
     }
 
     public function addPost(Request $req) {
-        $post = new Post;
-        $post->author=Auth::id();
-        $post->content=$req['body'];
-        $post->save();
-        return redirect('dashboard');
+        
     }
 
     /**
@@ -48,7 +44,32 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'body' => 'required|max:255',
+            'image' => 'mimes:jpg,png,jpeg|max:5048'
+        ]);
+
+        if ($request->image == null) {
+            $post = new Post;
+            $post->author=Auth::id();
+            $post->content=$request['body'];
+            $post->save();
+            return redirect('dashboard')->with(['message' => 'Your post has been submitted.', 'alert' => 'alert-success']);
+        }
+
+        $newImageName = time() . '-' . $request->image->extension();
+
+
+        $request->image->move(public_path('images'), $newImageName);
+
+        $post = new Post;
+        $post->author=Auth::id();
+        $post->content=$request['body'];
+        $post->image_path=$newImageName;
+        $post->save();
+        return redirect('dashboard')->with(['message' => 'Your post has been submitted', 'alert' => 'alert-success']);
+
     }
 
     /**
@@ -73,7 +94,10 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        return view('editpost', ['post' => $post]);
+        if (auth()->user()->id == $post->author || auth()->user()->is_admin) {
+            return view('editpost', ['post' => $post]);
+        }
+        return redirect()->to('post/'.$id);
     }
 
     /**
@@ -85,6 +109,11 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'body' => 'required|max:255'
+        ]);
+
         $post = Post::find($id);
         //$post->author=Auth::id();
         $post->content=$request['body'];

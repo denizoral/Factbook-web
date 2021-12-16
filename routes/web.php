@@ -33,7 +33,7 @@ Route::get('/editpost/{id}', [PostController::class, 'edit']);
 
 Route::get('/editcomment/{id}', [CommentsController::class, 'edit']);
 
-Route::post('/addpost', [PostController::class, 'addPost']);
+Route::post('/addpost', [PostController::class, 'store']);
 
 Route::post('/post/{id}/comments', [CommentsController::class, 'store']);
 

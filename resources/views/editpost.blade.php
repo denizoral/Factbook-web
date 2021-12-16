@@ -2,6 +2,7 @@
 @section('title posts')
 
 @section('content')
+
 <div class="card">
     <div class="card-header">
       Editing your post

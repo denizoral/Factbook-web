@@ -18,19 +18,8 @@
         </a>
         @if (Auth::check())
         <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link">Notifications</a></li>
+        {{-- <li class="nav-item"><a href="#" class="nav-link">Notifications</a></li> --}}
         <li class="nav-item"><a href="/post/new" class="nav-link">Create a post</a></li>
-        {{-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ Auth::user()->name }}
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Account</a>  
-                <a class="dropdown-item" href="#">Notifications</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
-            </div>
-        </li> --}}
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {{ Auth::user()->name }}
@@ -39,10 +28,10 @@
               <li><a class="dropdown-item" href="#">Account</a></li>
               <li><a class="dropdown-item" href="#">Notifications</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Log out</a></li>
+              <li><a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item" href="#">Log out</a></li>
             </ul>
           </li>
-        <li class="nav-item"><a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">Log out</a></li>
+        {{-- <li class="nav-item"><a href=""  class="nav-link">Log out</a></li> --}}
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
         </form>

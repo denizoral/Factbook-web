@@ -10,7 +10,10 @@
         <div class="postUsername">Posted by <b>{{ App\Models\User::find($post->author)->name }}</b></div>
         <time class="postDate" datetime="{{ $post->created_at }}">{{ $post->created_at->diffForHumans() }}</time>
         <p class="content" style="margin-left: 5px;">{{ $post->content }}</p>
-        @if ($post->author == Auth::id())
+        @if ($post->image_path == !null)
+                <img class="postPic" src="/images/{{ $post->image_path }}">
+        @endif
+        @if ($post->author == Auth::id() || Auth::user()->is_admin)
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 Options
@@ -53,7 +56,7 @@
                 <div class="commentUsername">Comment by <b>{{ App\Models\User::find($comment->author)->name }}</b></div>
                 <time class="postDate" datetime="{{ $comment->created_at }}">{{ $comment->created_at->diffForHumans() }}</time>
                 <div style="margin-left: 5px;">{{ ($comment->comment) }}</div>
-                @if ($comment->author == Auth::id())
+                @if ($comment->author == Auth::id() || Auth::user()->is_admin)
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         Options
