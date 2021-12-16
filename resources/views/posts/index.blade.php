@@ -59,14 +59,14 @@
                     Options
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownbtn">
-                        <li><a onclick="event.preventDefault(); document.getElementById('edit-post').submit();" class="dropdown-item" href="">Edit post</a></li>
-                        <li><a onclick="event.preventDefault(); document.getElementById('delete-post').submit();" class="dropdown-item" href="">Delete post</a></li>
+                        <li><a onclick="event.preventDefault(); document.getElementById('edit-post{{ $post->id }}').submit();" class="dropdown-item" href="">Edit post</a></li>
+                        <li><a onclick="event.preventDefault(); document.getElementById('delete-post{{ $post->id }}').submit();" class="dropdown-item" href="">Delete post</a></li>
                     </ul>
-                    <form id="delete-post" action="/post/delete/{{ $post->id }}" method="POST" style="display: none;">
+                    <form id="delete-post{{ $post->id }}" action="/post/delete/{{ $post->id }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                     </form>
-                    <form id="edit-post" action="/editpost/{{ $post->id }}" method="GET" style="display: none;">
+                    <form id="edit-post{{ $post->id }}" action="/editpost/{{ $post->id }}" method="GET" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                     @endif

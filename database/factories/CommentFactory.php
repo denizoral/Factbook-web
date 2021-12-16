@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CommentFactory extends Factory
@@ -14,9 +16,9 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'comment_content' => $this->faker->sentence,
-            'comment_author' => $this->faker->numberBetween($min=1, $max=30),
-            //'post_author' => $this->faker->numberBetween($min=1, $max=30),
+            'post_id' => Post::inRandomOrder()->value('id'),
+            'author' => User::inRandomOrder()->value('id'),
+            'comment' => $this->faker->text(),
         ];
     }
 }

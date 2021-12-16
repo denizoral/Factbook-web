@@ -62,15 +62,15 @@
                         Options
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a onclick="event.preventDefault(); document.getElementById('edit-comment').submit();" class="dropdown-item" class="dropdown-item" href="#">Edit comment</a></li>
-                        <li><a onclick="event.preventDefault(); document.getElementById('delete-comment').submit();" class="dropdown-item" href="#">Delete comment</a></li>
+                        <li><a onclick="event.preventDefault(); document.getElementById('edit-comment{{ $comment->id }}').submit();" class="dropdown-item" class="dropdown-item" href="#">Edit comment</a></li>
+                        <li><a onclick="event.preventDefault(); document.getElementById('delete-comment{{ $comment->id }}').submit();" class="dropdown-item" href="#">Delete comment</a></li>
                         </ul>
                     </div>
-                    <form id="delete-comment" action="/comment/delete/{{ $comment->id }}" method="POST" style="display: none;">
+                    <form id="delete-comment{{ $comment->id }}" action="/comment/delete/{{ $comment->id }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                     </form>
-                    <form id="edit-comment" action="/editcomment/{{ $comment->id }}" method="GET" style="display: none;">
+                    <form id="edit-comment{{ $comment->id }}" action="/editcomment/{{ $comment->id }}" method="GET" style="display: none;">
                     </form>
                 @endif
         </div>

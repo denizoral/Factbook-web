@@ -14,6 +14,6 @@ class PostTableSeeder extends Seeder
      */
     public function run()
     {
-        $post = Post::factory()->count(30)->create();
+        $post = Post::factory()->count(100)->create();
     }
 }

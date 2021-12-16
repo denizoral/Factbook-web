@@ -37,6 +37,7 @@ class CommentsController extends Controller
             'url' => url('/post/'.$post->id)
         ];
 
+        //prevent getting notifications if you comment on your own post.
         if (!($commentAuthor->id == $postAuthor->id)){
             $postAuthor->notify(new PostNotification($message));
         }
@@ -46,17 +47,20 @@ class CommentsController extends Controller
 
     public function destroy($comment) {
         $comment = Comment::find($comment);
-        $comment->delete();
-        return back();
+        if (auth()->user()->id == $comment->author || auth()->user()->is_admin) {
+            $comment->delete();
+            return back();
+        }
+        return redirect()->to('dashboard')->with(['message' => 'You can not delete that comment', 'alert' => 'alert-danger']);
     }
 
     public function edit($id)
     {
        $comment = Comment::findOrFail($id);
        if (auth()->user()->id == $comment->author || auth()->user()->is_admin){  
-            return view('editcomment', ['comment' => $comment]);
+            return view('comments.edit', ['comment' => $comment]);
         } else {
-            return redirect()->to('post/'.$comment->post_id);
+            return redirect()->to('dashboard')->with(['message' => 'You can not edit that comment', 'alert' => 'alert-danger']);
         }
         
     }

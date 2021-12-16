@@ -95,9 +95,9 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         if (auth()->user()->id == $post->author || auth()->user()->is_admin) {
-            return view('editpost', ['post' => $post]);
+            return view('posts.edit', ['post' => $post]);
         }
-        return redirect()->to('post/'.$id);
+        return redirect()->to('dashboard')->with(['message' => 'You can not edit that post', 'alert' => 'alert-danger']);
     }
 
     /**
@@ -111,15 +111,32 @@ class PostController extends Controller
     {
 
         $request->validate([
-            'body' => 'required|max:255'
+            'body' => 'required|max:255',
+            'image' => 'mimes:jpg,png,jpeg|max:5048'
         ]);
 
+        
+
+        if ($request->image == null) {
+            $post = Post::find($id);
+            $post->content=$request['body'];
+            $post->edited=true;
+            $post->update();
+            return redirect()->to('post/'.$id);
+        }
+
+
+        $newImageName = time() . '-' . $request->image->extension();
+
+
+        $request->image->move(public_path('images'), $newImageName);
         $post = Post::find($id);
-        //$post->author=Auth::id();
         $post->content=$request['body'];
+        $post->image_path=$newImageName;
         $post->edited=true;
         $post->update();
         return redirect()->to('post/'.$id);
+        
     }
 
     /**
@@ -131,7 +148,10 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
-        $result=$post->delete();
-        return redirect('dashboard');
+        if (auth()->user()->id == $post->author || auth()->user()->is_admin) {
+            $post->delete();
+            return redirect('dashboard');
+        }
+        return redirect()->to('dashboard')->with(['message' => 'You can not delete that', 'alert' => 'alert-danger']);
     }
 }

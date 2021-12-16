@@ -23,8 +23,6 @@ class CreatePostsTable extends Migration
 
             $table->foreign('author')->references('id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');
-            // $table->foreign('comment_author')->references('id')->on('comments')
-            //     ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
