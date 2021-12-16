@@ -44,7 +44,7 @@ class PostNotification extends Notification
         return (new MailMessage)
                     ->line($this->message['title'])
                     ->action($this->message['content'], $this->message['url'])
-                    ->line('Thank you for using our application!');
+                    ->line('Thank you for using our website!');
     }
 
     /**
