@@ -1,6 +1,8 @@
 # Factbook
 Factbook is a website for people to share pictures, facts, stories and more. It is similar to a popular website called "Quora".
 
+This project can be deployed to any hosting provider. I have deployed this to AWS because of its simplicity for me to allow hosting my website.
+
 
 ## This project is built in Laravel, a PHP framework 
 The functionalities are:
