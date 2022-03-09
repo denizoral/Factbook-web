@@ -1,8 +1,8 @@
-##Factbook
-Factbook is a website for people to share pictures, facts, stories and more, it is similar to popular website called "Quora".
+# Factbook
+Factbook is a website for people to share pictures, facts, stories and more. It is similar to a popular website called "Quora".
 
 
-#This project is built in Laravel, a PHP framework 
+## This project is built in Laravel, a PHP framework 
 The functionalities are:
 
 > Posting to main page
@@ -25,7 +25,7 @@ The functionalities are:
 
 > Email notification if someone interacts with your post
 
-#Whats next to be added?
+## Whats next to be added?
 > Like/Dislike
 
 
@@ -36,7 +36,7 @@ The functionalities are:
 
 
 
-##Below is a video demonstration of the project:
+## Below is a video demonstration of the project:
 
 
 
