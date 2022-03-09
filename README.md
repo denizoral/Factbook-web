@@ -6,17 +6,35 @@ Factbook is a website for people to share pictures, facts, stories and more, it 
 The functionalities are:
 
 > Posting to main page
+
+
 > Posting comments
+
+
 > Editing and deleting posts/comments
+
+
 > Ability to add a picture to the post
+
+
 > Admin account
+
+
 > Login/Register system
+
+
 > Email notification if someone interacts with your post
 
 #Whats next to be added?
 > Like/Dislike
+
+
 > Profile editor
+
+
 > Adding friends
+
+
 
 ##Below is a video demonstration of the project:
 
